@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Device extends Model
 {
+    protected $fillable = ['name'];
+
     public function histories()
     {
         return $this->hasMany(MoveHistory::class);
