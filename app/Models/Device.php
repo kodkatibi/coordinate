@@ -10,4 +10,9 @@ class Device extends Model
     {
         return $this->hasMany(MoveHistory::class);
     }
+
+    public function latestCoordinate()
+    {
+        return $this->hasOne(MoveHistory::class)->latest();
+    }
 }
