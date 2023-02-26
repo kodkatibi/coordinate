@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('wellcome');
-});
-Route::post('client','App\Http\Controllers\Api\DeviceController@create')->name('device.create');
+})->name('wellcome');
+Route::post('create/device', 'App\Http\Controllers\Api\DeviceController@create')->name('device.create');
+Route::get('client', 'App\Http\Controllers\Api\DeviceController@index')->name('client');

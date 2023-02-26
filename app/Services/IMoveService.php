@@ -4,9 +4,9 @@ namespace App\Services;
 
 interface IMoveService
 {
-    public function moveX(int $value);
+    public function moveX(array $data);
 
-    public function moveY(int $value);
+    public function moveY(array $data);
 
-    public function moveZ(int $value);
+    public function moveZ(array $data);
 }

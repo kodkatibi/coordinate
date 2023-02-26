@@ -31,4 +31,9 @@ class MoveHistoryRepository implements IHistoryRepository
     {
         return MoveHistory::query()->find($id)->delete();
     }
+
+    public function getLatestByDevice($deviceId, array $select = ['*'])
+    {
+        return MoveHistory::query()->where('device_id', $deviceId)->select($select)->latest()->first()->toArray();
+    }
 }

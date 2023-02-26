@@ -14,7 +14,7 @@ class DeviceRepository implements IDeviceRepository
 
     public function getById(int $id, array $select = ['*'])
     {
-        return Device::query()->with('latestCoordinate')->find($id)->select($select);
+        return Device::query()->with('latestCoordinate')->where('id', $id)->select($select)->first();
     }
 
     public function create(array $request)

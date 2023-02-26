@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('move')->group(function () {
+    Route::post('x', 'App\Http\Controllers\Api\MoveController@moveX')->name('move.x');
+    Route::post('y', 'App\Http\Controllers\Api\MoveController@moveY')->name('move.y');
+    Route::post('z', 'App\Http\Controllers\Api\MoveController@moveZ')->name('move.z');
 });

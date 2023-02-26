@@ -2,21 +2,59 @@
 
 namespace App\Services;
 
+use App\Repositories\MoveHistoryRepository;
+
 abstract class AMoveService implements IMoveService
 {
+    protected MoveHistoryRepository $historyRepository;
 
-    public function moveX(int $value)
+    public function __construct()
     {
-        // TODO: Implement moveX() method.
+        $this->historyRepository = new MoveHistoryRepository();
     }
 
-    public function moveY(int $value)
+    public function moveX(array $data)
     {
-        // TODO: Implement moveY() method.
+        $latest = $this->getLatestCoordinate($data['device_id']);
+
+        if ($data['value'] == '+') {
+            $latest['x_position'] += 1;
+        } else {
+            $latest['x_position'] -= 1;
+        }
+        $this->historyRepository->create($latest);
+        return $this->getLatestCoordinate($data['device_id']);
     }
 
-    public function moveZ(int $value)
+    public function moveY(array $data)
     {
-        // TODO: Implement moveZ() method.
+        $latest = $this->getLatestCoordinate($data['device_id']);
+
+        if ($data['value'] == '+') {
+            $latest['y_position'] += 1;
+        } else {
+            $latest['y_position'] -= 1;
+        }
+        $this->historyRepository->create($latest);
+        return $this->getLatestCoordinate($data['device_id']);
     }
+
+    public function moveZ(array $data)
+    {
+        $latest = $this->getLatestCoordinate($data['device_id']);
+
+        if ($data['value'] == '+') {
+            $latest['z_position'] += 1;
+        } else {
+            $latest['z_position'] -= 1;
+        }
+        $this->historyRepository->create($latest);
+        return $this->getLatestCoordinate($data['device_id']);
+    }
+
+    public function getLatestCoordinate($deviceId)
+    {
+        return $this->historyRepository->getLatestByDevice($deviceId);
+    }
+
 }

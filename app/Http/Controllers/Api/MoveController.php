@@ -2,19 +2,35 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Repositories\MoveHistoryRepository;
+use App\Http\Requests\MoveRequest;
+use App\Services\MoveService;
 
 class MoveController extends BaseApiController
 {
-    protected MoveHistoryRepository $historyRepository;
+    protected MoveService $service;
 
     public function __construct()
     {
-        $this->historyRepository = new MoveHistoryRepository();
+        $this->service = new MoveService();
     }
 
-    public function index()
+
+    public function moveX(MoveRequest $request)
     {
-
+        $data = $this->service->moveX($request->toArray());
+        return $this->response($data);
     }
+
+    public function moveY(MoveRequest $request)
+    {
+        $data = $this->service->moveY($request->toArray());
+        return $this->response($data);
+    }
+
+    public function moveZ(MoveRequest $request)
+    {
+        $data = $this->service->moveZ($request->toArray());
+        return $this->response($data);
+    }
+
 }

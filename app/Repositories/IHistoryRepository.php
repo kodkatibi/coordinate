@@ -12,4 +12,6 @@ interface IHistoryRepository
     public function update(array $request, int $id);
 
     public function delete(int $id);
+
+    public function getLatestByDevice($deviceId, array $select = ['*']);
 }
